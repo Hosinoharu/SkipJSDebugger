@@ -5,8 +5,8 @@
 .\debug_browser.ps1             # 默认打开 Chrome 浏览器，远程调试端口为 9222
 .\debug_browser.ps1 -Port 8888  # 默认打开 Chrome 浏览器，远程调试端口为 8888
 
-.\debug_browser.ps1 Edge               # 默认打开 Chrome 浏览器，远程调试端口为 9222
-.\debug_browser.ps1 Edge -Port 8888    # 默认打开 Chrome 浏览器，远程调试端口为 8888
+.\debug_browser.ps1 Edge               # 打开 Edge 浏览器，远程调试端口为 9222
+.\debug_browser.ps1 Edge -Port 8888    # 打开 Edge 浏览器，远程调试端口为 8888
 #>
 
 [CmdletBinding()]
