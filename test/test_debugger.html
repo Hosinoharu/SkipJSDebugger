@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>测试 debugger</title>
+    <style>
+        html {
+            background-color: #222;
+            color: #ccc;
+        }
+
+        button {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>测试能否跳过无限 Debugger</h3>
+    <button type="button">点我开始测试</button>
+</body>
+<script>
+    function check() {
+        debugger;
+    }
+
+    /** eval 触发的 debugger */
+    function eval_version() {
+        eval('debugger');
+        const a = 1;
+        eval('a + 1;debugger');
+    }
+
+    /** function 触发的 debugger */
+    function function_version() {
+        Function("debugger")();
+        new Function("debugger")();
+        (() => { }).constructor("debugger")();
+    }
+
+    function test_lovedebug() {
+        console.log("启动 cdp server 后，只有 lovedebug() 函数处才会断住！");
+        lovedebug();
+        debugger;
+    }
+
+    document.querySelector('button').addEventListener('click', function () {
+        setInterval(() => {
+            check();
+            eval_version();
+            function_version();
+            test_lovedebug();
+        }, 500);
+    })
+</script>
+
+</html>

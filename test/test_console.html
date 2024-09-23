@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>测试 console</title>
+    <style>
+        html {
+            background-color: #222;
+            color: #ccc;
+        }
+
+        button {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>测试 console 的控制台检测与报错式检测</h1>
+    <button type="button">点我开始测试</button>
+</body>
+<script>
+    document.querySelector('button').addEventListener('click', () => {
+        const re = /x/;
+        re.toString = function () {
+            alert("检测到啦");
+        }
+        console.log(re);
+
+        normal();
+        promise_version();
+        normal_version2();
+    });
+
+    // 下面 3 个测试函数取自 https://github.com/wushenperson/throwCheckOpen
+
+    function normal() {
+        var isOpen = false;
+        function show() {
+
+            if (!isOpen) setTimeout(() => {
+                alert("检测到控制台打开");
+            }, 0);
+            // isOpen = true;
+        };
+
+        function checkConsoleIsOpen() {
+            var err = new Error();
+            err.__defineGetter__("message", function () {
+                show();
+                return "456"
+            })
+            throw err;
+        }
+
+        checkConsoleIsOpen();
+    }
+
+    function promise_version() {
+        var isOpen = false;
+
+        function show() {
+            if (!isOpen)
+                setTimeout(() => {
+                    alert("检测到控制台打开");
+                }, 0),
+                    alert("检测到控制台打开");
+            //   isOpen = true;
+        }
+
+        function checkConsoleIsOpen() {
+            try {
+                document.createElement("div ");
+            } catch (err) {
+                let m = err.message;
+                err.__defineGetter__("message", function () {
+                    show();
+                    delete this.message;
+                    return m;
+                });
+                throw err;
+            }
+        }
+        function promise_check() {
+            new Promise(function (resolve, reject) {
+                try {
+                    checkConsoleIsOpen();
+                } catch (e) {
+                    reject(e);
+                }
+            })
+        }
+
+        checkConsoleIsOpen();
+        promise_check();
+    }
+
+    function normal_version2() {
+        var isOpen = false;
+        function show() {
+
+            if (!isOpen) setTimeout(() => {
+                alert("检测到控制台打开");
+            }, 0);
+            // isOpen = true;
+        };
+
+        function checkConsoleIsOpen() {
+            try {
+                document.createElement("div ");
+            } catch (throw_err) {
+                var err = new Error();
+                err.__defineGetter__("message", function () {
+                    show();
+                    return "456"
+                });
+                throw_err.cause = err;
+                throw throw_err;
+            }
+        }
+
+        checkConsoleIsOpen();
+    }
+
+
+</script>
+
+</html>

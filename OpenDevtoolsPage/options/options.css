@@ -1,0 +1,48 @@
+body {
+    background-color: #222;
+    color: #cccc;
+}
+
+h1 {
+    text-align: center;
+}
+
+.settings-container {
+    border: 1px solid orangered;
+    border-radius: 20px;
+    padding: 30px 30px;
+    text-align: center;
+    width: 50%;
+    margin: 30px auto;
+}
+
+.setting_panel {
+    margin: 20px auto;
+    font-size: 1.5em;
+    display: flex;
+    justify-content: center;
+}
+
+
+.setting_panel label {
+    margin: 0 20px 0 -50px;
+    width: 50%;
+}
+
+.setting_panel input {
+    border: 1px solid #666;
+    background-color: #222;
+    color: #ccc;
+    width: 50%;
+    text-align: center;
+}
+
+.setting_panel #reset {
+    margin: 10px auto -20px auto;
+    background-color: #982c04;
+    height: 2em;
+    border-style: none;
+    border-radius: 10px;
+    color: #ccc;
+    cursor: pointer;
+}

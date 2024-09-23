@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenDevtoolsPage's Option Page</title>
+    <link rel="stylesheet" href="options.css">
+</head>
+
+<body>
+    <h1>Settings For OpenDevtoolsPage</h1>
+    <form class="settings-container">
+        <div class="setting_panel">
+            <label for="web_socket_port">浏览器远程调试的端口</label>
+            <input type="number" name="web_socket_port" id="web_socket_port"
+                placeholder="默认为 9222">
+        </div>
+        <div class="setting_panel">
+            <label for="cdp_server_port">CDP 服务器的端口</label>
+            <input type="number" name="cdp_server_port" id="cdp_server_port"
+                placeholder="默认为 9221">
+        </div>
+        <div class="setting_panel">
+            <label for="debugger_name">自定义的 debugger 名称</label>
+            <input type="text" name="debugger_name" id="debugger_name"
+                placeholder="默认为 lovedebug">
+        </div>
+        <div class="setting_panel">
+            <input type="reset" id="reset"></input>
+        </div>
+
+    </form>
+</body>
+<script src="options.js"></script>
+
+</html>
