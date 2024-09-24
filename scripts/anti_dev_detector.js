@@ -68,8 +68,12 @@
 
     /** 使得网站的 console 失效 */
     function disable_console() {
+        // 忽略对以下 Console 属性的、函数的 hook
+        // 因为这个函数都会返回具体的值，且无法用于控制台检测
+        // 额，可能将来还有其它的情况，所以使用数组记录
+        const ignores = new Set(['createTask']);
         for (const n of Object.getOwnPropertyNames(console)) {
-            if (typeof console[n] === 'function') {
+            if ((typeof console[n] === 'function') && !ignores.has(n)) {
                 console[n] = create_func_proxy(console[n]);
             }
         }
